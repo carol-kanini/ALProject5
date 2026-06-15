@@ -1,17 +1,15 @@
-page 50100 "Mini Item List"
+page 50101 "Mini Item Card"
 {
-    PageType = List;
-    SourceTable = "Mini Item";
+    PageType = Card;
     ApplicationArea = All;
-    UsageCategory = Lists;
-    Caption = 'Mini Items';
-    CardPageId = "Mini item Card"; //links to card page
-
+    UsageCategory = Documents;
+    SourceTable = "Mini Item";
+    caption = 'Mini Item Card';
     layout
     {
         area(Content)
         {
-            repeater(Group)
+            group(General)
             {
                 field("Item No."; Rec."Item No.")
                 {
@@ -21,7 +19,7 @@ page 50100 "Mini Item List"
                 {
                     ApplicationArea = All;
                 }
-                field("Unit Price"; Rec."Unit Price")
+                field("Unit price"; Rec."Unit price")
                 {
                     ApplicationArea = All;
                 }
