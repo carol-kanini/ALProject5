@@ -21,7 +21,7 @@ table 50100 "Mini Item"
             DecimalPlaces = 2 : 2;
             trigger OnValidate()
             begin
-                "Total Price" := "Quantity" * "Unit price";
+                CalculateTotalPrice();
             end;
         }
         field(4; "Quantity"; Integer)
@@ -29,7 +29,7 @@ table 50100 "Mini Item"
             DataClassification = CustomerContent;
             trigger OnValidate()
             begin
-                "Total Price" := "Quantity" * "Unit price";
+                CalculateTotalPrice();
             end;
         }
         field(5; "Total Price"; Decimal)
@@ -38,5 +38,18 @@ table 50100 "Mini Item"
             editable = false;
         }
     }
+    keys
+    {
+        key(PK; "Item No.")
+        {
+            Clustered = true;
+        }
+    }
+
+
+    local procedure CalculateTotalPrice()
+    begin
+        "Total Price" := "Quantity" * "Unit price";
+    end;
 
 }
