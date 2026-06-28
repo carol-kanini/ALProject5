@@ -38,6 +38,8 @@ table 50100 "Mini Item"
             editable = false;
         }
     }
+
+    
     keys
     {
         key(PK; "Item No.")
@@ -52,4 +54,20 @@ table 50100 "Mini Item"
         "Total Price" := "Quantity" * "Unit price";
     end;
 
+    trigger OnInsert()
+    begin
+        if "Item No." = '' then
+            "Item No." := GetNextNo();
+    end;
+
+    local procedure GetNextNo(): Code[20]
+    var
+        ItemRec: Record "Mini Item";
+    begin
+        if ItemRec.FindLast() then
+            exit(IncStr(ItemRec."Item No."))
+        else
+            exit('1');
+    end;
 }
+

@@ -1,43 +1,41 @@
-page 50110 "Mini Item List"
+page 50111 "Mini Customer List"
 {
     PageType = List;
-    SourceTable = "Mini Item";
+    SourceTable = "Mini Customer";
     ApplicationArea = All;
     UsageCategory = Lists;
-    Caption = 'Mini Items';
-    CardPageId = "Mini item Card"; //links to card page
 
     layout
     {
         area(Content)
         {
-            repeater(Group)
+            repeater(General)
             {
-                field("Item No."; Rec."Item No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Item Name"; Rec."Item Name")
+
+                field("Name"; Rec."Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Unit Price"; Rec."Unit Price")
+
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Quantity"; Rec."Quantity")
+
+                field("Email"; Rec."Email")
                 {
                     ApplicationArea = All;
                 }
-                field("Total Price"; Rec."Total Price")
+
+                field("City"; Rec."City")
                 {
                     ApplicationArea = All;
                 }
             }
         }
     }
-    trigger OnOpenPage()
-    begin
-        Message('Mini Item List PAGE OPENED');
-    end;
 }
