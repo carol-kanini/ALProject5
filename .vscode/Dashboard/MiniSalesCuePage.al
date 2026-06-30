@@ -11,38 +11,54 @@ page 50116 "Mini Sales Cue Page"
         {
             cuegroup(Overview)
             {
-                Caption = '🌿 Savanna Sales Ltd. — Welcome Back!';
+                Caption = 'Business Overview';
 
                 field(TotalCustomers; Rec."Total Customers")
                 {
                     ApplicationArea = All;
-                    Caption = 'Customers 👥';
+                    Caption = 'Customers';
                     DrillDownPageId = "Mini Customer List";
-                    Style = Favorable;  // green
+                    Style = Standard;
                 }
 
                 field(TotalItems; Rec."Total Items")
                 {
                     ApplicationArea = All;
-                    Caption = 'Items in Stock 📦';
+                    Caption = 'Inventory';
                     DrillDownPageId = "Mini Item List";
-                    Style = Favorable;  // green
+                    Style = Favorable;
                 }
 
                 field(OpenOrders; Rec."Open Orders")
                 {
                     ApplicationArea = All;
-                    Caption = 'Open Orders 🕐';
+                    Caption = 'Open Orders';
                     DrillDownPageId = "Mini Sales Header List";
-                    Style = Ambiguous;  // yellow - needs attention
+                    Style = Attention;
                 }
 
                 field(PostedOrders; Rec."Posted Orders")
                 {
                     ApplicationArea = All;
-                    Caption = 'Posted Orders ✅';
+                    Caption = 'Posted Orders';
                     DrillDownPageId = "Mini Sales Header List";
-                    Style = Favorable;  // green - completed
+                    Style = Favorable;
+                }
+
+                field(TotalSalespersons; Rec."Total Salespersons")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Sales Team';
+                    DrillDownPageId = "Mini Salesperson List";
+                    Style = Standard;
+                }
+
+                field(TotalMovements; Rec."Total Movements")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Inventory Activity';
+                    DrillDownPageId = "Mini Stock Movement List";
+                    Style = Ambiguous;
                 }
             }
         }

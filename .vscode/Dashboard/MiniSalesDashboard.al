@@ -2,14 +2,21 @@ page 50115 "Mini Sales Dashboard"
 {
     PageType = RoleCenter;
     ApplicationArea = All;
-    Caption = 'Mini Sales Dashboard';
+    Caption = 'Savanna Business Solution';
     UsageCategory = Administration;
 
     layout
     {
         area(RoleCenter)
         {
+            // Row 1 - Business Overview
             part(SalesCuePart; "Mini Sales Cue Page")
+            {
+                ApplicationArea = All;
+            }
+
+            // Row 2 - Alerts
+            part(AlertsCuePart; "Mini Sales Alerts Page")
             {
                 ApplicationArea = All;
             }
@@ -40,7 +47,6 @@ page 50115 "Mini Sales Dashboard"
                     Image = List;
                 }
 
-                // ← removed extra { } that was here
                 action(StockMovements)
                 {
                     Caption = 'Stock Movements';
@@ -76,6 +82,43 @@ page 50115 "Mini Sales Dashboard"
                     ApplicationArea = All;
                     RunObject = page "Mini Salesperson List";
                     Image = SalesPerson;
+                }
+            }
+
+            group(Reports)
+            {
+                Caption = 'Reports';
+
+                action(StockReport)
+                {
+                    Caption = 'Stock Report';
+                    ApplicationArea = All;
+                    RunObject = report "Mini Stock Report";
+                    Image = Report;
+                }
+
+                action(SalesReport)
+                {
+                    Caption = 'Sales Report';
+                    ApplicationArea = All;
+                    RunObject = report "Mini Sales Report";
+                    Image = Report;
+                }
+
+                action(MovementReport)
+                {
+                    Caption = 'Stock Movement Report';
+                    ApplicationArea = All;
+                    RunObject = report "Mini Stock Movement Report";
+                    Image = Report;
+                }
+
+                action(CustomerReport)
+                {
+                    Caption = 'Customer Report';
+                    ApplicationArea = All;
+                    RunObject = report "Mini Customer Report";
+                    Image = Report;
                 }
             }
         }

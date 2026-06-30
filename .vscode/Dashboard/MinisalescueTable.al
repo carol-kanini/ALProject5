@@ -9,7 +9,6 @@ table 50104 "Mini Sales Cue"
             DataClassification = CustomerContent;
         }
 
-        // Live count of all customers
         field(2; "Total Customers"; Integer)
         {
             FieldClass = FlowField;
@@ -17,7 +16,6 @@ table 50104 "Mini Sales Cue"
             Editable = false;
         }
 
-        // Live count of all items
         field(3; "Total Items"; Integer)
         {
             FieldClass = FlowField;
@@ -25,7 +23,6 @@ table 50104 "Mini Sales Cue"
             Editable = false;
         }
 
-        // Live count of open orders
         field(4; "Open Orders"; Integer)
         {
             FieldClass = FlowField;
@@ -33,11 +30,34 @@ table 50104 "Mini Sales Cue"
             Editable = false;
         }
 
-        // Live count of posted orders
         field(5; "Posted Orders"; Integer)
         {
             FieldClass = FlowField;
             CalcFormula = count("Mini Sales Header" where(Status = const(Posted)));
+            Editable = false;
+        }
+
+        // NEW - Total Salespersons
+        field(6; "Total Salespersons"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Mini Salesperson");
+            Editable = false;
+        }
+
+        // NEW - Low Stock Items (quantity less than 10)
+        field(7; "Low Stock Items"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Mini Item" where(Quantity = filter(.. 9)));
+            Editable = false;
+        }
+
+        // NEW - Total Stock Movements
+        field(8; "Total Movements"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Mini Stock Movement");
             Editable = false;
         }
     }

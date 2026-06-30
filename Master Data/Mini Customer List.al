@@ -4,6 +4,7 @@ page 50111 "Mini Customer List"
     SourceTable = "Mini Customer";
     ApplicationArea = All;
     UsageCategory = Lists;
+    CardPageId = "Mini Customer Card";
 
     layout
     {
