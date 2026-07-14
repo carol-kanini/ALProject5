@@ -2,23 +2,38 @@ page 50115 "Mini Sales Dashboard"
 {
     PageType = RoleCenter;
     ApplicationArea = All;
-    Caption = 'Savanna Business Solution';
+    Caption = 'Mini Sales Dashboard';
     UsageCategory = Administration;
 
     layout
     {
         area(RoleCenter)
         {
-            // Row 1 - Business Overview
+            // Combined welcome + KPIs + alerts
             part(SalesCuePart; "Mini Sales Cue Page")
             {
                 ApplicationArea = All;
             }
 
-            // Row 2 - Alerts
-            part(AlertsCuePart; "Mini Sales Alerts Page")
+
+            // Recent Orders
+            part(RecentOrdersPart; "Mini Recent Orders")
             {
                 ApplicationArea = All;
+                Caption = 'Recent Sales Orders';
+            }
+
+            // Latest Stock Movements
+            part(RecentMovementsPart; "Mini Recent Movements")
+            {
+                ApplicationArea = All;
+                Caption = 'Latest Stock Movements';
+            }
+            //QuickActionsPart
+            part(QuickActioPart; "Mini Quick Actions")
+            {
+                ApplicationArea = All;
+                Caption = '⚡ Quick Actions';
             }
         }
     }
@@ -36,7 +51,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'New Sales Order';
                     ApplicationArea = All;
                     RunObject = page "Mini Sales Order Card";
-                    Image = NewOrder;
                 }
 
                 action(AllOrders)
@@ -44,7 +58,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'All Orders';
                     ApplicationArea = All;
                     RunObject = page "Mini Sales Header List";
-                    Image = List;
                 }
 
                 action(StockMovements)
@@ -52,7 +65,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Stock Movements';
                     ApplicationArea = All;
                     RunObject = page "Mini Stock Movement List";
-                    Image = Entries;
                 }
             }
 
@@ -65,7 +77,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Customers';
                     ApplicationArea = All;
                     RunObject = page "Mini Customer List";
-                    Image = Customer;
                 }
 
                 action(Items)
@@ -73,7 +84,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Items';
                     ApplicationArea = All;
                     RunObject = page "Mini Item List";
-                    Image = Item;
                 }
 
                 action(Salespersons)
@@ -81,7 +91,13 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Salespersons';
                     ApplicationArea = All;
                     RunObject = page "Mini Salesperson List";
-                    Image = SalesPerson;
+                }
+
+                action(WelcomeSetup)
+                {
+                    Caption = 'Welcome Setup';
+                    ApplicationArea = All;
+                    RunObject = page "Mini Welcome Setup Card";
                 }
             }
 
@@ -94,7 +110,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Stock Report';
                     ApplicationArea = All;
                     RunObject = report "Mini Stock Report";
-                    Image = Report;
                 }
 
                 action(SalesReport)
@@ -102,7 +117,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Sales Report';
                     ApplicationArea = All;
                     RunObject = report "Mini Sales Report";
-                    Image = Report;
                 }
 
                 action(MovementReport)
@@ -110,7 +124,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Stock Movement Report';
                     ApplicationArea = All;
                     RunObject = report "Mini Stock Movement Report";
-                    Image = Report;
                 }
 
                 action(CustomerReport)
@@ -118,7 +131,6 @@ page 50115 "Mini Sales Dashboard"
                     Caption = 'Customer Report';
                     ApplicationArea = All;
                     RunObject = report "Mini Customer Report";
-                    Image = Report;
                 }
             }
         }
