@@ -16,24 +16,6 @@ page 50116 "Mini Sales Cue Page"
             {
                 Caption = '🌿 SAVANNA BUSINESS SOLUTIONS ERP';
 
-                field(CompanyTile; CompanyText)
-                {
-                    ApplicationArea = All;
-                    Caption = '🏢 Company';
-                    Editable = false;
-                    Style = Strong;
-
-                }
-
-                field(MottoTile; MottoText)
-                {
-                    ApplicationArea = All;
-                    Caption = '💬 Motto';
-                    Editable = false;
-                    Style = Favorable;
-
-                }
-
                 field(GreetingTile; WelcomeText)
                 {
                     ApplicationArea = All;
@@ -42,6 +24,21 @@ page 50116 "Mini Sales Cue Page"
                     Style = Ambiguous;
                 }
 
+                field(CompanyTile; CompanyText)
+                {
+                    ApplicationArea = All;
+                    Caption = '🏢 Company';
+                    Editable = false;
+                    Style = Strong;
+                }
+
+                field(MottoTile; MottoText)
+                {
+                    ApplicationArea = All;
+                    Caption = '💬 Motto';
+                    Editable = false;
+                    Style = Favorable;
+                }
                 field(DateTile; DateText)
                 {
                     ApplicationArea = All;
@@ -123,9 +120,17 @@ page 50116 "Mini Sales Cue Page"
                     trigger OnDrillDown()
                     var
                         MiniItem: Record "Mini Item";
+                        TempMiniItem: Record "Mini Item" temporary;
                     begin
-                        MiniItem.SetFilter(Quantity, '..9');
-                        Page.Run(Page::"Mini Item List", MiniItem);
+                        if MiniItem.FindSet() then
+                            repeat
+                                if MiniItem.Quantity <= MiniItem."Reorder Point" then begin
+                                    TempMiniItem := MiniItem;
+                                    TempMiniItem.Insert();
+                                  end;
+                            until MiniItem.Next() = 0;
+
+                        Page.Run(Page::"Mini Item List", TempMiniItem);
                     end;
                 }
 
@@ -150,7 +155,9 @@ page 50116 "Mini Sales Cue Page"
     var
         SalesCue: Record "Mini Sales Cue";
         WelcomeSetup: Record "Mini Welcome Setup";
+        User: Record User;
         Hour: Integer;
+        UserDisplayName: Text;
     begin
         // Initialize cue record
         if not SalesCue.Get() then begin
@@ -159,17 +166,28 @@ page 50116 "Mini Sales Cue Page"
         end;
         Rec := SalesCue;
 
+        // Recalculate Low Stock Items (no longer a FlowField)
+        Rec.UpdateLowStockCount();
+
+        // Get the current user's display name
+        if User.Get(UserSecurityId()) then begin
+            if User."Full Name" <> '' then
+                UserDisplayName := User."Full Name"
+            else
+                UserDisplayName := User."User Name";
+        end else
+            UserDisplayName := UserId();
+
         // Get greeting based on time
         Hour := Time2Hours(Time());
         if Hour < 12 then
-            WelcomeText := 'Good Morning! Ready to make sales today? 🌅'
+            WelcomeText := StrSubstNo('Good Morning, %1! Ready to make sales today? 🌅', UserDisplayName)
         else
             if Hour < 17 then
-                WelcomeText := 'Good Afternoon! Keep pushing those sales! ☀️'
+                WelcomeText := StrSubstNo('Good Afternoon, %1! Keep pushing those sales! ☀️', UserDisplayName)
             else
-                WelcomeText := 'Good Evening! Wrapping up for the day? 🌙';
+                WelcomeText := StrSubstNo('Good Evening, %1! Wrapping up for the day? 🌙', UserDisplayName);
 
-        // Get company name and motto
         // Get company name and motto
         if WelcomeSetup.Get() then begin
             CompanyText := UpperCase(WelcomeSetup."Company Name");

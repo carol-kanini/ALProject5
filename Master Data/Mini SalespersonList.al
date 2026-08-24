@@ -34,6 +34,10 @@ Page 50117 "Mini Salesperson List"
                 {
                     ApplicationArea = All;
                 }
+                field("Description"; Rec."Description")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

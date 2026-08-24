@@ -2,18 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Your own server",
+            "name": "BC252 local",
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
-            "server": "http://localhost:8080/BC252",
+            "server": "http://localhost",
+            "port": 7049,
             "serverInstance": "BC252",
             "authentication": "Windows",
             "startupObjectId": 50115,
             "startupObjectType": "Page",
             "tenant": "default",
             "launchBrowser": true,
-            
+            "breakOnError": true,
+            "breakOnRecordWrite": false
         }
     ]
 }

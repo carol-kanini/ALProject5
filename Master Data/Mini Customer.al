@@ -37,4 +37,12 @@ table 50101 "Mini Customer"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    var
+        NoSeries: Codeunit "No. Series";
+    begin
+        if "No." = '' then
+            "No." := NoSeries.GetNextNo('MINICUST');
+    end;
 }

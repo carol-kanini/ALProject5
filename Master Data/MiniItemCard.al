@@ -13,6 +13,10 @@ page 50101 "Mini Item Card"
             {
                 field("Item No."; Rec."Item No.") { }
                 field("Item Name"; Rec."Item Name") { }
+                field("Reorder Point"; Rec."Reorder Point")
+                {
+                    ApplicationArea = All;
+                }
             }
 
             group(Prices)

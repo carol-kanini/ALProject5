@@ -33,6 +33,10 @@ page 50110 "Mini Item List"
                 {
                     ApplicationArea = All;
                 }
+                field("Reorder Point"; Rec."Reorder Point")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

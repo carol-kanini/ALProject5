@@ -1,0 +1,9 @@
+{
+    
+    "server": "http://localhost",
+    "serverInstance": "BC252",
+    "port": 7049,
+    "authentication": "Windows",
+    "tenant": "default"
+
+}

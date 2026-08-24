@@ -37,7 +37,6 @@ table 50104 "Mini Sales Cue"
             Editable = false;
         }
 
-        // NEW - Total Salespersons
         field(6; "Total Salespersons"; Integer)
         {
             FieldClass = FlowField;
@@ -45,15 +44,13 @@ table 50104 "Mini Sales Cue"
             Editable = false;
         }
 
-        // NEW - Low Stock Items (quantity less than 10)
+        // CHANGED - no longer a FlowField; calculated via UpdateLowStockCount()
         field(7; "Low Stock Items"; Integer)
         {
-            FieldClass = FlowField;
-            CalcFormula = count("Mini Item" where(Quantity = filter(.. 9)));
+            DataClassification = CustomerContent;
             Editable = false;
         }
 
-        // NEW - Total Stock Movements
         field(8; "Total Movements"; Integer)
         {
             FieldClass = FlowField;
@@ -69,4 +66,20 @@ table 50104 "Mini Sales Cue"
             Clustered = true;
         }
     }
+
+    procedure UpdateLowStockCount()
+    var
+        MiniItem: Record "Mini Item";
+        LowStockCount: Integer;
+    begin
+        LowStockCount := 0;
+        if MiniItem.FindSet() then
+            repeat
+                if MiniItem.Quantity <= MiniItem."Reorder Point" then
+                    LowStockCount += 1;
+            until MiniItem.Next() = 0;
+
+        "Low Stock Items" := LowStockCount;
+        Modify();
+    end;
 }

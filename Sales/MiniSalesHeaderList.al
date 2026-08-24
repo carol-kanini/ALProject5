@@ -4,6 +4,7 @@ page 50112 "Mini Sales Header List"
     SourceTable = "Mini Sales Header";
     ApplicationArea = All;
     UsageCategory = Lists;
+    CardPageId = "Mini Sales Order Card";
 
     layout
     {

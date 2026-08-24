@@ -1,19 +1,15 @@
 table 50100 "Mini Item"
-
 {
-
     DataClassification = CustomerContent;
     fields
-
     {
-        field(1; "item No."; code[20])
+        field(1; "item No."; Code[20])
         {
             DataClassification = CustomerContent;
         }
         field(2; "Item Name"; Text[100])
         {
             DataClassification = CustomerContent;
-
         }
         field(3; "Unit price"; Decimal)
         {
@@ -35,11 +31,16 @@ table 50100 "Mini Item"
         field(5; "Total Price"; Decimal)
         {
             DataClassification = CustomerContent;
-            editable = false;
+            Editable = false;
+        }
+        field(6; "Reorder Point"; Integer)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Reorder Point';
+            MinValue = 1;
         }
     }
 
-    
     keys
     {
         key(PK; "Item No.")
@@ -47,7 +48,6 @@ table 50100 "Mini Item"
             Clustered = true;
         }
     }
-
 
     local procedure CalculateTotalPrice()
     begin
@@ -70,4 +70,3 @@ table 50100 "Mini Item"
             exit('1');
     end;
 }
-
